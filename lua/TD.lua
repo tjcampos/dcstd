@@ -212,12 +212,13 @@ function TD.waveCaller()
 	
 	if TD.wave ~= 0 then
 		trigger.action.outText('Wave Completed! Get ready for the next wave... ', TD.timeBetweenWaves)
+		timer.scheduleFunction(TD.spawnNextWave, {}, timer.getTime() + TD.timeBetweenWaves)
 	else
 		trigger.action.outText('Welcome to DCS Tower Defence.' .. 
-			'Survive as long as your team can. Get ready for start.', 33)
+			' Survive for as long as your team can. Get ready for start.', 18)
 		trigger.action.outSound('InicioRed.ogg')
+		timer.scheduleFunction(TD.spawnNextWave, {}, timer.getTime() + 18)
 	end
-	timer.scheduleFunction(TD.spawnNextWave, {}, timer.getTime() + TD.timeBetweenWaves)
 	return timer.getTime() + TD.timeBetweenWaves + 3
 end
 
